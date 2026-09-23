@@ -1,0 +1,10 @@
+{
+  "title": "Cargo Logistics",
+  "description": "Streamline global logistics management with real-time tracking, inventory control, and efficient communication for businesses to enhance operational efficiency.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false
+  }
+}
