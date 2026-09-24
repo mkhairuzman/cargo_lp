@@ -1,240 +1,266 @@
 import { useState } from 'react';
 import { useInView } from './hooks';
 
-const services = [
+const modes = [
   {
-    num: '01',
+    id: 'ocean',
+    code: 'MOD-01',
     name: 'Ocean Freight',
-    short: 'Full container and consolidation solutions across major global shipping lanes.',
-    capabilities: ['FCL – Full Container Load', 'LCL – Less than Container', 'Port-to-Port', 'Door-to-Door'],
-    benefits: ['Weekly sailings on key corridors', 'Real-time vessel tracking', 'Customs documentation support'],
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=900&h=700&fit=crop&auto=format&q=80',
+    headline: 'High-volume international maritime transport with weekly fixed-day departures.',
+    overview:
+      'Scheduled container liner services connecting Tier-1 deep-water ports across Trans-Pacific, Trans-Atlantic, and Asia-Europe corridors. Offering flexible Full Container Load (FCL) and Less than Container Load (LCL) consolidation with verified gross mass (VGM) and ocean bill of lading automation.',
+    capabilities: [
+      { label: 'FCL & LCL Consolidation', detail: 'Dedicated 20ft, 40ft, and 40ft High-Cube container allocation' },
+      { label: 'Climate-Controlled Reefer', detail: '-30°C to +30°C monitored active marine reefer units' },
+      { label: 'Heavy Project Cargo', detail: 'Out-of-gauge (OOG) and heavy-lift breakbulk coordination' },
+      { label: 'Port-to-Port & Door Intermodal', detail: 'Seamless ocean-to-rail intermodal interchange at terminals' },
+    ],
+    telemetry: {
+      velocity: '18 - 22 kts',
+      schedule: 'Weekly Fixed-Day Sailings',
+      leadTime: '14 - 28 Days Transoceanic',
+      compliance: 'IMO / SOLAS / VGM Certified',
+    },
+    image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1400&h=900&fit=crop&auto=format&q=85',
+    imageAlt: 'Modern container ship under power in international waters',
   },
   {
-    num: '02',
-    name: 'Air Freight',
-    short: 'Priority and standard air cargo services to over 150 destinations worldwide.',
-    capabilities: ['Express & Priority', 'General Cargo', 'Charter Solutions', 'Dangerous Goods (IATA)'],
-    benefits: ['Next-flight-out options', 'Airport-to-airport and door-to-door', 'Temperature-controlled capability'],
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&h=700&fit=crop&auto=format&q=80',
+    id: 'air',
+    code: 'MOD-02',
+    name: 'Air Cargo',
+    headline: 'Time-critical global air charter and scheduled freighter capacity.',
+    overview:
+      'Direct main-deck and belly-hold cargo space connecting major global aviation gateways. Engineered for expedited high-value freight, temperature-sensitive pharmaceuticals, and urgent automotive replacement supply chains with 24-48 hour delivery windows.',
+    capabilities: [
+      { label: 'Priority Express', detail: 'Next-flight-out guarantees with dedicated ramp transfer' },
+      { label: 'Pharma Cold-Chain', detail: 'IATA CEIV Pharma certified handling with dry-ice re-icing' },
+      { label: 'Full Freighter Charter', detail: 'Dedicated Boeing 777F & 747-8F charter routing for oversize loads' },
+      { label: 'Dangerous Goods (DGR)', detail: 'Fully certified IATA DGR hazardous material specialists' },
+    ],
+    telemetry: {
+      velocity: '850 - 920 km/h',
+      schedule: 'Daily Gateway Departures',
+      leadTime: '24 - 72 Hours Transcontinental',
+      compliance: 'IATA CEIV / AEO-F Accredited',
+    },
+    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&h=900&fit=crop&auto=format&q=85',
+    imageAlt: 'Air freighter being loaded with unit load device cargo pallets',
   },
   {
-    num: '03',
-    name: 'Road Freight',
-    short: 'Flexible ground transport across regional and cross-border trade corridors.',
-    capabilities: ['Full Truckload (FTL)', 'Partial / LTL', 'Refrigerated Transport', 'Cross-border Clearance'],
-    benefits: ['GPS-tracked fleet', 'Dedicated & shared options', 'Overnight regional service'],
-    image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=900&h=700&fit=crop&auto=format&q=80',
+    id: 'rail-road',
+    code: 'MOD-03',
+    name: 'Overland & Rail',
+    headline: 'Cross-continental rail bridges and secured European road feeder networks.',
+    overview:
+      'Bridging maritime gateways and inland manufacturing clusters with high-capacity container block trains and GPS-telematic road convoys. Achieving up to 68% carbon reduction over long-haul road haulage while sustaining predictable scheduled transit times.',
+    capabilities: [
+      { label: 'Trans-Eurasian Rail', detail: 'Scheduled block-train corridors between East Asia and Europe' },
+      { label: 'Bonded FTL & LTL', detail: 'Sealed cross-border road transport under TIR carnet' },
+      { label: 'Telematics Tracking', detail: 'Continuous satellite positioning, door sensors, and geofencing' },
+      { label: 'Last-Mile Drayage', detail: 'Port-to-warehouse drayage with zero demurrage scheduling' },
+    ],
+    telemetry: {
+      velocity: '65 - 90 km/h Rail Avg.',
+      schedule: 'Tri-Weekly Block Trains',
+      leadTime: '12 - 16 Days Eurasia Transit',
+      compliance: 'TIR Carnet / CMR Convention',
+    },
+    image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1400&h=900&fit=crop&auto=format&q=85',
+    imageAlt: 'Modern intermodal freight transport corridor and container chassis',
   },
   {
-    num: '04',
-    name: 'Warehousing',
-    short: 'Strategic storage and distribution centers in key logistics hubs.',
-    capabilities: ['Bonded & Free Zone Storage', 'Pick & Pack', 'Cross-docking', 'Inventory Management'],
-    benefits: ['WMS with real-time visibility', 'Value-added services', 'Scalable capacity'],
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&h=700&fit=crop&auto=format&q=80',
-  },
-  {
-    num: '05',
-    name: 'Customs Clearance',
-    short: 'Expert import/export brokerage to keep cargo moving across borders.',
-    capabilities: ['Import & Export Declarations', 'Tariff Classification', 'Duty Optimization', 'Compliance Audit'],
-    benefits: ['Licensed brokers in 20+ countries', 'Automated pre-clearance', 'Regulatory advisory'],
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&h=700&fit=crop&auto=format&q=80',
-  },
-  {
-    num: '06',
-    name: 'Last-Mile Delivery',
-    short: 'Final delivery solutions that connect your cargo to its end destination.',
-    capabilities: ['Urban & Rural Delivery', 'Proof-of-Delivery', 'Appointment Delivery', 'Returns Management'],
-    benefits: ['98.2% first-attempt success', 'Real-time delivery updates', 'White-glove options'],
-    image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=900&h=700&fit=crop&auto=format&q=80',
+    id: 'customs-contract',
+    code: 'MOD-04',
+    name: 'Contract Logistics & Customs',
+    headline: 'Bonded free-zone warehousing and pre-cleared regulatory customs brokerage.',
+    overview:
+      'Integrated supply chain execution combining strategically positioned bonded storage facilities with licensed in-house customs brokerage. We eliminate regulatory border friction through pre-arrival declaration filing, tariff classification, and fiscal representation.',
+    capabilities: [
+      { label: 'Automated Brokerage', detail: 'Direct EDI interfaces with European, US, and Asian customs' },
+      { label: 'Bonded Warehousing', detail: 'Duty-deferred storage in major maritime and air free zones' },
+      { label: 'Compliance Audit', detail: 'Tariff classification (HS Code), origin certificates, and duty optimization' },
+      { label: 'Inventory Staging', detail: 'WMS integration with vendor-managed inventory and cross-docking' },
+    ],
+    telemetry: {
+      velocity: 'Sub-4h Pre-Clearance',
+      schedule: 'Continuous 24/7 Processing',
+      leadTime: 'Pre-Arrival Documentation',
+      compliance: 'WCO SAFE / Authorized Economic Operator',
+    },
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1400&h=900&fit=crop&auto=format&q=85',
+    imageAlt: 'High-bay automated racking in modern logistics distribution hub',
   },
 ];
 
 export function Services() {
-  const [active, setActive] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
   const { ref, inView } = useInView();
-  const service = services[active];
+  const current = modes[activeTab];
 
   return (
     <section
       ref={ref as React.RefObject<HTMLElement>}
-      className="section-light py-28 lg:py-36"
+      id="services"
+      className="py-24 lg:py-32 section-light border-b border-[var(--border-subtle)]"
     >
       <div className="max-w-[1360px] mx-auto px-6">
-        {/* Header */}
-        <div className="mb-16 grid lg:grid-cols-2 gap-8 items-end">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-[var(--border-subtle)]">
           <div>
             <div
-              className={`label-caps mb-5 flex items-center gap-3 ${inView ? 'anim-fade-up' : 'opacity-0'}`}
-              style={{ color: 'var(--brand-orange)' }}
+              className={`label-caps mb-4 flex items-center gap-3 text-[var(--brand-orange)] ${inView ? 'anim-fade-up' : 'opacity-0'}`}
             >
-              <span className="inline-block w-6 h-px" style={{ backgroundColor: 'var(--brand-orange)' }} />
-              Our Services
+              <span className="inline-block w-8 h-px bg-[var(--brand-orange)]" />
+              <span>Multimodal Architecture</span>
             </div>
             <h2
-              className={`heading-xl ${inView ? 'anim-fade-up delay-100' : 'opacity-0'}`}
-              style={{ color: 'var(--text-primary)' }}
+              className={`heading-xl text-[var(--text-primary)] ${inView ? 'anim-fade-up delay-100' : 'opacity-0'}`}
             >
-              One network.
-              <br />
-              Every mode.
+              One network. Every mode.
             </h2>
           </div>
           <p
-            className={`text-base leading-relaxed ${inView ? 'anim-fade-up delay-200' : 'opacity-0'}`}
-            style={{ color: 'var(--text-secondary)' }}
+            className={`text-base text-[var(--text-secondary)] max-w-[480px] leading-relaxed ${inView ? 'anim-fade-up delay-200' : 'opacity-0'}`}
           >
-            From a single shipment to a complex supply chain, we manage freight across every transportation mode with integrated systems and dedicated expertise.
+            We eliminate the seams between maritime carriers, air freighters, and overland rail systems. Every cargo movement operates under synchronized dispatch and continuous visibility.
           </p>
         </div>
 
-        {/* Desktop: left index + right visual */}
-        <div className="hidden lg:grid lg:grid-cols-[420px_1fr] gap-0" style={{ border: '1px solid var(--border-subtle)', borderRadius: '8px', overflow: 'hidden' }}>
-          {/* Service list */}
-          <div style={{ borderRight: '1px solid var(--border-subtle)' }}>
-            {services.map((s, i) => (
+        {/* Mode Selector Tabs (Editorial style) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 mb-8">
+          {modes.map((mode, index) => {
+            const isActive = activeTab === index;
+            return (
               <button
-                key={s.name}
-                className={`service-item w-full text-left ${active === i ? 'active' : ''}`}
-                onClick={() => setActive(i)}
+                key={mode.id}
+                onClick={() => setActiveTab(index)}
+                className={`p-5 text-left border rounded-sm transition-all duration-200 cursor-pointer flex flex-col justify-between ${
+                  isActive
+                    ? 'bg-[var(--surface)] border-[var(--brand-orange)] shadow-sm'
+                    : 'bg-[var(--bg-secondary)] border-transparent hover:border-[var(--border-strong)]'
+                }`}
+                aria-pressed={isActive}
               >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div
-                      className="label-caps mb-1"
-                      style={{ color: active === i ? 'var(--brand-orange)' : 'var(--text-muted)' }}
-                    >
-                      {s.num}
-                    </div>
-                    <div
-                      className="text-base font-700"
-                      style={{ color: active === i ? 'var(--text-primary)' : 'var(--text-secondary)', letterSpacing: '-0.01em' }}
-                    >
-                      {s.name}
-                    </div>
-                  </div>
-                  <svg
-                    width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                    style={{ color: active === i ? 'var(--brand-orange)' : 'var(--border-strong)', transition: 'color 200ms' }}
+                <div className="flex items-center justify-between mb-3">
+                  <span
+                    className={`font-mono-data text-xs font-bold ${
+                      isActive ? 'text-[var(--brand-orange)]' : 'text-[var(--text-muted)]'
+                    }`}
                   >
-                    <polyline points="9 18 15 12 9 6"/>
-                  </svg>
+                    {mode.code}
+                  </span>
+                  {isActive && (
+                    <span className="w-2 h-2 rounded-full bg-[var(--brand-orange)]" />
+                  )}
+                </div>
+                <div
+                  className={`text-base font-extrabold tracking-tight ${
+                    isActive ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'
+                  }`}
+                >
+                  {mode.name}
                 </div>
               </button>
-            ))}
-          </div>
+            );
+          })}
+        </div>
 
-          {/* Right panel */}
-          <div className="flex flex-col" style={{ backgroundColor: 'var(--surface)' }}>
-            {/* Image */}
-            <div className="relative overflow-hidden" style={{ height: '320px' }}>
-              <img
-                key={service.image}
-                src={service.image}
-                alt={service.name}
-                className="w-full h-full object-cover anim-fade-in"
-                style={{ transition: 'opacity 400ms' }}
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(to bottom, transparent 50%, var(--surface) 100%)' }}
-              />
-              {/* Service number overlay */}
-              <div
-                className="absolute top-6 right-6 text-6xl font-800 select-none"
-                style={{ color: 'rgba(255,255,255,0.12)', letterSpacing: '-0.04em' }}
-              >
-                {service.num}
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="p-8 flex-1">
-              <h3 className="heading-md mb-3" style={{ color: 'var(--text-primary)' }}>
-                {service.name}
-              </h3>
-              <p className="text-sm mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                {service.short}
-              </p>
-
-              <div className="grid grid-cols-2 gap-8">
-                <div>
-                  <div className="label-caps mb-3" style={{ color: 'var(--text-muted)' }}>
-                    Capabilities
-                  </div>
-                  <ul className="space-y-2">
-                    {service.capabilities.map((c) => (
-                      <li key={c} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                        <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: 'var(--brand-orange)' }} />
-                        {c}
-                      </li>
-                    ))}
-                  </ul>
+        {/* Selected Mode Showcase: Asymmetric Editorial Spread */}
+        <div className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-sm overflow-hidden shadow-sm">
+          <div className="grid lg:grid-cols-12">
+            {/* Left Content Area (7 cols) */}
+            <div className="lg:col-span-7 p-8 lg:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-[var(--border-subtle)]">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="status-chip status-transit">{current.code}</span>
+                  <span className="text-xs font-mono-data text-[var(--text-muted)]">
+                    {current.telemetry.compliance}
+                  </span>
                 </div>
-                <div>
-                  <div className="label-caps mb-3" style={{ color: 'var(--text-muted)' }}>
-                    Key Benefits
-                  </div>
-                  <ul className="space-y-2">
-                    {service.benefits.map((b) => (
-                      <li key={b} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--brand-orange)" strokeWidth="2.5" strokeLinecap="round">
-                          <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
+
+                <h3 className="heading-lg text-[var(--text-primary)] mb-4 tracking-tight">
+                  {current.headline}
+                </h3>
+
+                <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed mb-8">
+                  {current.overview}
+                </p>
+
+                {/* Capabilities Sub-Grid */}
+                <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                  {current.capabilities.map((c) => (
+                    <div
+                      key={c.label}
+                      className="p-4 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-sm"
+                    >
+                      <div className="font-bold text-sm text-[var(--text-primary)] mb-1">
+                        {c.label}
+                      </div>
+                      <div className="text-xs text-[var(--text-secondary)] leading-normal">
+                        {c.detail}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="mt-8 pt-6" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-                <a href="#quote" className="btn-primary">
-                  Request {service.name} Quote
-                  <svg className="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12 5 19 12 12 19"/>
+              {/* Action & Rate CTA */}
+              <div className="pt-6 border-t border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-4">
+                <div className="font-mono-data text-xs text-[var(--text-muted)]">
+                  STANDARD ROUTING: <span className="font-bold text-[var(--text-primary)]">{current.telemetry.schedule}</span>
+                </div>
+                <a
+                  href="#quote"
+                  className="btn-primary text-xs font-semibold"
+                >
+                  Configure {current.name} Rate
+                  <svg className="btn-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
                   </svg>
                 </a>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Mobile: vertical panels */}
-        <div className="lg:hidden space-y-6">
-          {services.map((s) => (
-            <div
-              key={s.name}
-              className="overflow-hidden rounded-sm"
-              style={{ border: '1px solid var(--border-subtle)' }}
-            >
-              <div className="relative overflow-hidden" style={{ height: '200px' }}>
-                <img src={s.image} alt={s.name} className="w-full h-full object-cover" />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, transparent 40%, rgba(7,26,43,0.9) 100%)' }} />
-                <div className="absolute bottom-4 left-4">
-                  <div className="label-caps mb-1" style={{ color: 'var(--brand-orange)' }}>{s.num}</div>
-                  <div className="text-lg font-700 text-white">{s.name}</div>
+            {/* Right Visual & Operational Telemetry (5 cols) */}
+            <div className="lg:col-span-5 bg-[var(--bg-secondary)] flex flex-col justify-between">
+              {/* Cinematic Industrial Image */}
+              <div className="relative h-64 lg:h-72 overflow-hidden border-b border-[var(--border-subtle)]">
+                <img
+                  src={current.image}
+                  alt={current.imageAlt}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07131F]/70 via-transparent to-transparent flex items-end p-4">
+                  <span className="font-mono-data text-[11px] text-white/90 font-medium">
+                    {current.name} Operational Asset
+                  </span>
                 </div>
               </div>
-              <div className="p-5" style={{ backgroundColor: 'var(--surface)' }}>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{s.short}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {s.capabilities.map((c) => (
-                    <span
-                      key={c}
-                      className="text-xs px-2 py-1 rounded"
-                      style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}
-                    >
-                      {c}
-                    </span>
-                  ))}
+
+              {/* Operational Specification Matrix */}
+              <div className="p-6 lg:p-8 space-y-4 font-mono-data text-xs">
+                <div className="label-caps text-[var(--text-muted)] mb-2">Operational Telemetry</div>
+
+                <div className="flex justify-between py-2 border-b border-[var(--border-subtle)]">
+                  <span className="text-[var(--text-muted)]">AVERAGE VELOCITY</span>
+                  <span className="font-bold text-[var(--text-primary)]">{current.telemetry.velocity}</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-[var(--border-subtle)]">
+                  <span className="text-[var(--text-muted)]">TRANSIT SCHEDULE</span>
+                  <span className="font-bold text-[var(--text-primary)]">{current.telemetry.schedule}</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-[var(--border-subtle)]">
+                  <span className="text-[var(--text-muted)]">TRANSIT WINDOW</span>
+                  <span className="font-bold text-[var(--text-primary)]">{current.telemetry.leadTime}</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-[var(--border-subtle)]">
+                  <span className="text-[var(--text-muted)]">REGULATORY CLEARANCE</span>
+                  <span className="font-bold text-[var(--brand-orange)]">{current.telemetry.compliance}</span>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import { useInView } from './hooks';
 
 const alerts = [
-  { id: 'AL-0441', type: 'DELAY', route: 'Rotterdam → Riyadh', detail: 'Port congestion — +18h delay', severity: 'warning' },
+  { id: 'AL-0441', type: 'DELAY', route: 'Rotterdam → Singapore', detail: 'Weather bypass active — ETA preserved', severity: 'warning' },
   { id: 'AL-0438', type: 'WEATHER', route: 'Shanghai → Singapore', detail: 'Storm advisory — Route rerouted', severity: 'info' },
   { id: 'AL-0435', type: 'DOCS', route: 'Dubai → Jakarta', detail: 'Missing HS code — Action required', severity: 'critical' },
 ];

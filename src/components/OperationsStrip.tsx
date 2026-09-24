@@ -1,12 +1,12 @@
 const routes = [
-  { from: 'JEDDAH', to: 'KUALA LUMPUR', status: 'IN TRANSIT', statusClass: 'status-transit' },
-  { from: 'SHANGHAI', to: 'JAKARTA', status: 'CUSTOMS CLEARED', statusClass: 'status-cleared' },
-  { from: 'DUBAI', to: 'SINGAPORE', status: 'ARRIVING TODAY', statusClass: 'status-arrived' },
-  { from: 'ROTTERDAM', to: 'RIYADH', status: 'BOOKED', statusClass: 'status-booked' },
+  { from: 'ROTTERDAM', to: 'SINGAPORE', status: 'IN TRANSIT', statusClass: 'status-transit' },
+  { from: 'SHANGHAI', to: 'HAMBURG', status: 'CUSTOMS CLEARED', statusClass: 'status-cleared' },
+  { from: 'DUBAI', to: 'FRANKFURT', status: 'ARRIVING TODAY', statusClass: 'status-arrived' },
+  { from: 'ANTWERP', to: 'NEW YORK', status: 'BOOKED', statusClass: 'status-booked' },
   { from: 'SINGAPORE', to: 'ROTTERDAM', status: 'IN TRANSIT', statusClass: 'status-transit' },
-  { from: 'KUALA LUMPUR', to: 'DUBAI', status: 'CUSTOMS CLEARED', statusClass: 'status-cleared' },
-  { from: 'JAKARTA', to: 'JEDDAH', status: 'BOOKED', statusClass: 'status-booked' },
-  { from: 'RIYADH', to: 'SHANGHAI', status: 'IN TRANSIT', statusClass: 'status-transit' },
+  { from: 'LOS ANGELES', to: 'TOKYO', status: 'CUSTOMS CLEARED', statusClass: 'status-cleared' },
+  { from: 'CHICAGO', to: 'ROTTERDAM', status: 'BOOKED', statusClass: 'status-booked' },
+  { from: 'FRANKFURT', to: 'SHANGHAI', status: 'IN TRANSIT', statusClass: 'status-transit' },
 ];
 
 function RouteItem({ route }: { route: (typeof routes)[number] }) {
