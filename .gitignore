@@ -2,12 +2,10 @@ node_modules/
 dist/
 build/
 .cache/
-.env
-.env.*
-!.env.example
+.env*
 .vite/
-.DS_Store
-Thumbs.db
+qa/
+archive/
 vite.config.*.timestamp-*
 *.tsbuildinfo
 *-debug.log*
@@ -23,22 +21,3 @@ logs/
 # beside it.
 /.plugins/
 /.opencode-skills/
-
-# Local design/audit artifacts; never publish.
-/.figma/
-/.chrome-audit-temp/
-/audit-screenshots/
-/*AUDIT*.md
-/*FRESH_EXPORT_CHECK*.md
-/*.zip
-
-# Local agent instructions.
-/AGENTS.md
-/CLAUDE.md
-/.mise.toml
-/.gitattributes
-/src/imports/pasted_text/
-
-# Local Python scratch.
-/__pycache__/
-*.py[cod]
