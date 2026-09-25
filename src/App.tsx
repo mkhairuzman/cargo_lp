@@ -79,10 +79,10 @@ export default function App() {
                   className="button primary"
                   onClick={() => setQuoteOpen(true)}
                 >
-                  Request Freight Rate <span aria-hidden="true">↗</span>
+                  Request Freight Rate
                 </button>
                 <a className="text-link" href="#tracking">
-                  Track Shipment <span aria-hidden="true">↗</span>
+                  Track Shipment
                 </a>
               </div>
             </div>
@@ -124,18 +124,18 @@ export default function App() {
                 Meridian brings transport, storage and shipment visibility into
                 one clear conversation.
               </p>
-              <dl className="proof-numbers">
+              <dl className="proof-numbers proof-capabilities">
                 <div>
-                  <dt>04</dt>
-                  <dd>Transport disciplines</dd>
+                  <dt>Multimodal</dt>
+                  <dd>Ocean, air, road and storage</dd>
                 </div>
                 <div>
-                  <dt>08</dt>
-                  <dd>Selected gateways</dd>
+                  <dt>Gateway-led</dt>
+                  <dd>Connected international corridors</dd>
                 </div>
                 <div>
-                  <dt>01</dt>
-                  <dd>Connected journey</dd>
+                  <dt>One view</dt>
+                  <dd>Milestones kept in context</dd>
                 </div>
               </dl>
             </div>
@@ -324,10 +324,10 @@ export default function App() {
                 className="button primary"
                 onClick={() => setQuoteOpen(true)}
               >
-                Request Freight Rate <span aria-hidden="true">↗</span>
+                Request Freight Rate
               </button>
               <a className="text-link" href="#tracking">
-                Track Shipment <span aria-hidden="true">↗</span>
+                Track Shipment
               </a>
             </div>
           </div>

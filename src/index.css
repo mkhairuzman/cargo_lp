@@ -307,6 +307,10 @@ h1 {
   line-height: 1.6;
   color: var(--muted);
 }
+.proof-capabilities dt {
+  font-size: clamp(20px, 2vw, 30px);
+  letter-spacing: -0.04em;
+}
 .services {
   background: var(--surface);
 }
@@ -981,7 +985,7 @@ h2[data-reveal].is-visible {
   }
   .hero-image {
     margin-inline: 0;
-    height: 390px;
+    height: min(390px, 92vw);
   }
   .hero-image > img {
     object-position: 54% center;
@@ -1014,6 +1018,9 @@ h2[data-reveal].is-visible {
   }
   .proof-numbers dt {
     font-size: 43px;
+  }
+  .proof-capabilities dt {
+    font-size: 19px;
   }
   .proof-numbers dd {
     font-size: 11px;
@@ -1143,8 +1150,8 @@ h2[data-reveal].is-visible {
     height: 0;
   }
   .map-canvas {
-    width: calc(100% + 70px);
-    margin-left: -45px;
+    width: calc(100% + 40px);
+    margin-left: -20px;
     margin-block: 25px 10px;
   }
   .map-canvas svg {
