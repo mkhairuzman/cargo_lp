@@ -1,0 +1,50 @@
+Photography sources
+===================
+These are real documentary photographs, used as illustrative logistics imagery.
+Visible ships, vehicles, facilities and operator marks do not imply ownership,
+partnership, endorsement or a Meridian customer relationship.
+
+hero.webp
+Subject: container ships and port cranes.
+Source: https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=2200&fit=max&fm=webp&q=80
+Retained from the project's existing Unsplash photography selection.
+
+ocean.webp
+Photographer: Bent Van Aeken / Unsplash.
+Subject: overhead container ship near Willemstad, Curacao.
+Photo page: https://unsplash.com/photos/an-aerial-view-of-a-cargo-ship-in-the-ocean-0A7YwYhZhWw
+Source: https://images.unsplash.com/photo-1724597500306-a4cbb7d1324e?w=1200&fit=max&fm=webp&q=80
+License: https://unsplash.com/license
+
+air.webp
+Photographer: Sevcan Alkan / Unsplash.
+Subject: Cargoair / DHL cargo aircraft on a runway.
+Photo page: https://unsplash.com/photos/dhl-cargo-airplane-on-the-runway-PZ8mG2ZRqUw
+Source: https://images.unsplash.com/photo-1767868278754-7991a4a4bfcf?w=1200&fit=max&fm=webp&q=80
+License: https://unsplash.com/license
+
+road.webp
+Subject: container truck on a rural road.
+Source: https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1200&fit=max&fm=webp&q=80
+Retained from the project's existing Unsplash photography selection.
+
+warehouse.webp
+Subject: storage racks and parcels in a fulfillment warehouse.
+Source: https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&fit=max&fm=webp&q=80
+Retained from the project's existing Unsplash photography selection.
+
+port.webp
+Subject: overhead view of a container terminal.
+Source: https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200&fit=max&fm=webp&q=80
+Retained from the project's existing Unsplash photography selection.
+
+world.svg
+Authoritative world map supplied by the project owner; copied byte-for-byte.
+SHA256: FF40C2AD088AC193463D30E6633FE89607E44E95F4A2E141B125033443C04E6C
+
+Typography
+==========
+Manrope variable Latin, weights 200-800, normal.
+Source: https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2
+License: SIL Open Font License 1.1, included at /fonts/OFL.txt.
+License source: https://github.com/google/fonts/blob/main/ofl/manrope/OFL.txt

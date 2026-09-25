@@ -1,6 +1,7 @@
 {
-  "title": "Cargo Logistics",
-  "description": "Streamline global logistics management with real-time tracking, inventory control, and efficient communication for businesses to enhance operational efficiency.",
+  "title": "Meridian | International Logistics",
+  "description": "Moving freight with absolute clarity. Ocean, air, road and warehousing brought together in one connected journey.",
+  "icons": { "icon": "/favicon.svg" },
   "robots": {
     "index": false
   },
